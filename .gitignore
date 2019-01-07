@@ -1,0 +1,19 @@
+# Generated
+.stack-work/
+html-haskell.cabal
+*~
+
+# Build
+dist
+
+# Haskell
+*.hi
+
+# C
+*.o
+
+# IDEs
+.idea
+
+# Other
+.DS_Store
