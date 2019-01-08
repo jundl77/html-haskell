@@ -21,12 +21,14 @@ description:         Please see the README on GitHub at <https://github.com/jund
 
 dependencies:
 - base >= 4.7 && < 5
+- aeson
 
 library:
   source-dirs: src
   dependencies:
   - html-haskell
   - type-of-html
+  - aeson
 
 executables:
   html-haskell-exe:
@@ -40,6 +42,7 @@ executables:
     - html-haskell
     - type-of-html
     - scotty
+    - aeson
 
 tests:
   html-haskell-test:

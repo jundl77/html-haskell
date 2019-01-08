@@ -1,12 +1,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-import Web.Scotty
+module Main where
 
-import Data.Monoid (mconcat)
+import Web.Scotty
 
 port = 3000
 
-main = scotty 8080 $
-  get "/:word" $ do
-    beam <- param "word"
-    html $ mconcat ["<h1>Scotty, ", beam, " me up!</h1>"]
+main :: IO ()
+main = scotty port $
+    get "/status" $ text "200"
