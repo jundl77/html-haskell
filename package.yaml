@@ -8,7 +8,6 @@ copyright:           "2019 Julian Brendl"
 
 extra-source-files:
 - README.md
-- ChangeLog.md
 
 # Metadata used when publishing your package
 # synopsis:            Short description of your package
@@ -21,12 +20,10 @@ description:         Please see the README on GitHub at <https://github.com/jund
 
 dependencies:
 - base >= 4.7 && < 5
-- aeson
 
 library:
   source-dirs: src
   dependencies:
-  - html-haskell
   - type-of-html
   - aeson
 
@@ -40,9 +37,11 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - html-haskell
-    - type-of-html
-    - scotty
+    - Spock >=0.11
+    - mtl
     - aeson
+    - text
+    - stm-containers >=0.2 && < 0.3
 
 tests:
   html-haskell-test:

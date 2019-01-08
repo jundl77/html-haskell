@@ -1,6 +1,6 @@
 module Lib
-    ( someFunc
+    ( transpile
     ) where
 
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+transpile :: String -> String
+transpile code = code
