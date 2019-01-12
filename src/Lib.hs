@@ -7,17 +7,22 @@ import           Language.Haskell.Interpreter
 import           Data.Text        (Text, pack, unpack)
 import           Html
 
+prefix = "\\() -> let renderWrapper = render\n\
+          \               where\n"
+suffix = "in renderString renderWrapper"
+space = "                   "
+
 transpile :: Text -> IO Text
-transpile = html
-    where
-        html :: Text -> IO Text
-        html code = do
-            putStrLn $ unpack code
-            
-            r <- runInterpreter $ do
-                setImports ["Prelude", "Html"]
-                interpret (unpack code) (as :: () -> String)
-            
-            case r of
-                Left error -> return $ (pack . show) error
-                Right renderFunc -> return $ pack $ renderFunc()
+transpile code = do
+    putStrLn $ unpack code
+    
+    r <- runInterpreter $ do
+        setImports ["Prelude", "Html"]
+        interpret ((prepare . unpack) code) (as :: () -> String)
+    
+    case r of
+        Left error -> return $ (pack . show) error
+        Right renderFunc -> return $ pack $ renderFunc()
+
+prepare :: String -> String
+prepare str = prefix ++ unlines (map (space++) (lines str)) ++ suffix

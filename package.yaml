@@ -28,7 +28,6 @@ library:
   - aeson
   - text
   - hint
-  - nix-eval
 
 executables:
   html-haskell-exe:
@@ -56,3 +55,6 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - html-haskell
+    - text
+    - tasty
+    - tasty-hunit
