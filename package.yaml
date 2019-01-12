@@ -26,6 +26,9 @@ library:
   dependencies:
   - type-of-html
   - aeson
+  - text
+  - hint
+  - nix-eval
 
 executables:
   html-haskell-exe:

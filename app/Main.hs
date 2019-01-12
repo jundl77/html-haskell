@@ -3,21 +3,26 @@
 
 module Main where 
 
+  
+import           Lib
+
 import           Web.Spock
 import           Web.Spock.Config
-
 import           Data.Aeson       hiding (json)
-import           Data.Monoid      ((<>))
 import           Data.Text        (Text, pack)
+
 import           GHC.Generics
+import           Control.Monad.IO.Class
+
+
+type Api = SpockM () () () ()
+type ApiAction a = SpockAction () () () a
 
 data PostData = PostData { code :: Text } deriving (Generic, Show)
 instance ToJSON PostData
 instance FromJSON PostData
 
-type Api = SpockM () () () ()
-type ApiAction a = SpockAction () () () a
-
+port :: Int
 port = 3000
 
 main :: IO ()
@@ -30,4 +35,5 @@ app = do
   get "status" $ text "200"
   post "transpile" $ do
     postData <- jsonBody' :: ApiAction PostData
-    text $ "Code: " <> pack ((show . code) postData)
+    result <- liftIO $ (transpile . code) postData
+    text result
