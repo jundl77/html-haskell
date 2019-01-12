@@ -40,6 +40,8 @@ executables:
     dependencies:
     - html-haskell
     - Spock >=0.11
+    - wai-cors
+    - wai-extra
     - mtl
     - aeson
     - text

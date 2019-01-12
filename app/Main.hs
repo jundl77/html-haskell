@@ -10,10 +10,11 @@ import           Web.Spock
 import           Web.Spock.Config
 import           Data.Aeson       hiding (json)
 import           Data.Text        (Text, pack)
+import           Network.Wai.Middleware.Cors
+import           Network.Wai.Middleware.RequestLogger
 
 import           GHC.Generics
 import           Control.Monad.IO.Class
-
 
 type Api = SpockM () () () ()
 type ApiAction a = SpockAction () () () a
@@ -22,13 +23,12 @@ data PostData = PostData { code :: Text } deriving (Generic, Show)
 instance ToJSON PostData
 instance FromJSON PostData
 
-port :: Int
-port = 3000
-
 main :: IO ()
 main = do
+  let port = 3001
+  let middlewares = fmap ((simpleCors . logStdoutDev) .)
   spockCfg <- defaultSpockCfg () PCNoDatabase ()
-  runSpock port (spock spockCfg app)
+  runSpock port $ middlewares $ (spock spockCfg app)
 
 app :: Api
 app = do
