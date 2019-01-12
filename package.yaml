@@ -42,6 +42,7 @@ executables:
     - Spock >=0.11
     - wai-cors
     - wai-extra
+    - wai
     - mtl
     - aeson
     - text
