@@ -6,6 +6,7 @@ import           Control.Monad
 import           Language.Haskell.Interpreter
 import           Data.Text        (Text, pack, unpack)
 import           Html
+import qualified Html.Attribute as A
 
 prefix = "\\() -> let renderWrapper = render\n\
           \               where\n"
@@ -17,7 +18,7 @@ transpile code = do
     putStrLn $ unpack code
     
     r <- runInterpreter $ do
-        setImports ["Prelude", "Html"]
+        setImportsQ [("Prelude", Nothing), ("Html", Nothing), ("Html.Attribute", Just "A")]
         interpret ((prepare . unpack) code) (as :: () -> String)
     
     case r of
