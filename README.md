@@ -29,7 +29,7 @@ Make a POST request to ```/transpile``` with the following payload as JSON:
 }
 ```
 
-**Important:** The code has to be formatted as shown in the example above, providing the ```render``` function that returns a Haskell-HTML element like in the example above.
+**Important:** The code has to be formatted as shown in the example above, providing the ```render``` function that returns a Haskell-HTML.
 
 ### /status
 You can check the status of the service with a simple GET request to ```/status```. If everything is okay, 200 should be returned.
