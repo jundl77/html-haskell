@@ -9,13 +9,21 @@ This project arose from the need to build React components using Haskell. Under 
 Haskell code:
 
 ```haskell
-render = div_A (A.style_ "color: red") "HELLO WORLD!"
+render = div $ pp "red" (genString "Hello")
+
+div content = div_ content
+pp color content = p_A (A.style_ $ "color: " ++ color) content
+
+genString :: String -> String
+genString str = str ++ " " ++ str ++ "!"
 ```
 
 Resulting HTML:
 
 ```html
-<div style="color: red">HELLO WORLD!</div>
+<div>
+  <p style="color: red">Hello Hello!</p>
+</div>
 ```
 
 ## API
