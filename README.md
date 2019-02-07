@@ -9,10 +9,9 @@ This project arose from the need to build React components using Haskell. Under 
 Haskell code:
 
 ```haskell
-render = div $ pp "red" (genString "Hello")
+render = div_ $ colorPp "red" (genString "Hello")
 
-div content = div_ content
-pp color content = p_A (A.style_ $ "color: " ++ color) content
+colorPp color content = p_A (A.style_ $ "color: " ++ color) content
 
 genString :: String -> String
 genString str = str ++ " " ++ str ++ "!"
